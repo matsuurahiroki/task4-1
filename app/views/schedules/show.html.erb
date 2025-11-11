@@ -1,0 +1,15 @@
+<!-- app/views/schedules/show.html.erb -->
+<h1>予定詳細</h1>
+
+<table border="1" cellpadding="6" cellspacing="0">
+  <tr><th>タイトル</th><td><%= @schedule.title %></td></tr>
+  <tr><th>開始日</th><td><%= fmt_date(@schedule.start_on) %></td></tr>
+  <tr><th>終了日</th><td><%= fmt_date(@schedule.end_on) %></td></tr>
+  <tr><th>終日</th><td><%= mark_all_day(@schedule.all_day) %></td></tr>
+  <tr><th>スケジュールメモ</th><td><pre style="white-space:pre-wrap;"><%= @schedule.memo %></pre></td></tr>
+</table>
+
+<p>
+  <%= link_to '一覧へ戻る', schedules_path %> |
+  <%= link_to '編集', edit_schedule_path(@schedule) %>
+</p>

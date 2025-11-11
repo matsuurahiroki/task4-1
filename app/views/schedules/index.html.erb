@@ -1,0 +1,54 @@
+<!-- app/views/schedules/index.html.erb -->
+<h1>予定一覧</h1>
+
+<div style="margin: 8px 0;">
+  本日: <strong><%= @today.strftime('%Y/%m/%d') %></strong>
+   / 予定の合計数: <strong><%= @total %></strong>
+</div>
+
+<p><%= link_to '新規追加', new_schedule_path %></p>
+
+<table border="1" cellpadding="6" cellspacing="0">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>タイトル</th>
+      <th>開始日</th>
+      <th>終了日</th>
+      <th>終日</th>
+      <th>更新日時</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @schedules.each do |s| %>
+      <tr>
+        <td><%= s.id %></td>
+        <td><%= s.title %></td>
+        <td><%= fmt_date(s.start_on) %></td>
+        <td><%= fmt_date(s.end_on) %></td>
+        <td style="text-align:center;"><%= mark_all_day(s.all_day) %></td>
+        <td><%= fmt_datetime(s.updated_at) %></td>
+        <td>
+          <%= link_to '詳細', schedule_path(s) %> |
+          <%= link_to '編集', edit_schedule_path(s) %> |
+          <!-- 削除モーダル起動 -->
+          <button type="button" onclick="document.getElementById('dlg-<%= s.id %>').showModal();">
+            削除
+          </button>
+
+          <!-- HTMLネイティブdialogでモーダル -->
+          <dialog id="dlg-<%= s.id %>">
+            <p>予定を削除しますか？</p>
+            <form method="dialog" style="display:inline;">
+              <button>キャンセル</button>
+            </form>
+            <%= form_with url: schedule_path(s), method: :delete, style: "display:inline;" do %>
+              <button>削除する</button>
+            <% end %>
+          </dialog>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

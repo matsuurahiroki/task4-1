@@ -1,0 +1,8 @@
+<!-- app/views/schedules/edit.html.erb -->
+<h1>予定編集</h1>
+<%= render 'form', schedule: @schedule %>
+
+<p>
+  <%= link_to '一覧へ戻る', schedules_path %> |
+  <%= link_to '詳細', @schedule %>
+</p>
