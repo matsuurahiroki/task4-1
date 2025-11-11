@@ -1,5 +1,5 @@
 # config/routes.rb
 Rails.application.routes.draw do
-  root 'schedules#index'
+  root "schedules#index"
   resources :schedules
 end

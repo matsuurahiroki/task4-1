@@ -9,6 +9,6 @@ class Schedule < ApplicationRecord
 
   def end_on_not_before_start_on
     return if start_on.blank? || end_on.blank?
-    errors.add(:end_on, 'は開始日以降にしてください') if end_on < start_on
+    errors.add(:end_on, "は開始日以降にしてください") if end_on < start_on
   end
 end
